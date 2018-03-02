@@ -21,14 +21,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="jumbotail.com/app/weather"
+                    android:host="jumbotail.com"
+                    android:pathPrefix="/app/weather"
                     android:scheme="http" />
             </intent-filter>
         </activity>
