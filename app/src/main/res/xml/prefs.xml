@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/settings_title_units">
+        <ListPreference
+            android:defaultValue="°C"
+            android:entries="@array/temperatureUnits"
+            android:entryValues="@array/temperatureUnitsValues"
+            android:key="unit"
+            android:title="@string/setting_tempUnits" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="temperatureInteger"
+            android:title="@string/setting_showTempAsInteger" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_title_display">
+
+
+        <ListPreference
+            android:defaultValue="arrow"
+            android:entries="@array/windDirectionFormats"
+            android:entryValues="@array/windDirectionFormatValues"
+            android:key="windDirectionFormat"
+            android:title="@string/setting_wind_direction_format" />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/settings_title_data">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/refreshIntervals"
+            android:entryValues="@array/refreshIntervalsValues"
+            android:key="refreshInterval"
+            android:title="@string/setting_refreshInterval" />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_title_location">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="updateLocationAutomatically"
+            android:title="@string/setting_update_location_automatically" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cz.jumbotail.weather">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+        <activity
+            android:name="cz.jumbotail.weather.activities.SplashActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="jumbotail.com/app/weather"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="cz.jumbotail.weather.activities.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name="cz.jumbotail.weather.activities.SettingsActivity"
+            android:theme="@style/AppTheme" />
+
+        <receiver android:name="cz.jumbotail.weather.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="cz.jumbotail.weather.activities.MapActivity"
+            android:parentActivityName="cz.jumbotail.weather.activities.MainActivity"
+            android:theme="@style/AppTheme.NoStatusBar"
+            android:label="@string/action_weather_map"
+            />
+
+        <activity
+            android:name="cz.jumbotail.weather.activities.GraphActivity"
+            android:label="@string/action_graphs"
+            android:parentActivityName="cz.jumbotail.weather.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+
+</manifest>
