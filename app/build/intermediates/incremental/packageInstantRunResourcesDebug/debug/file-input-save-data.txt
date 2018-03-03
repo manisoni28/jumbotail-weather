@@ -1,0 +1,31 @@
+#Internal package file, do not edit.
+#Sat Mar 03 00:52:46 IST 2018
+2.base=/Users/mani/Downloads/forecastie-master/app/build/intermediates/assets/debug
+5.set=ASSET
+0.path=leaflet.css
+2.baseType=DIRECTORY
+3.base=/Users/mani/Downloads/forecastie-master/app/build/intermediates/assets/debug
+2.set=ASSET
+1.path=fonts/weather.ttf
+4.base=/Users/mani/Downloads/forecastie-master/app/build/intermediates/assets/debug
+count=7
+5.baseType=DIRECTORY
+2.path=map.html
+5.base=/Users/mani/Downloads/forecastie-master/app/build/intermediates/assets/debug
+4.set=ASSET
+3.path=leaflet.js
+6.base=/Users/mani/Downloads/forecastie-master/app/build/intermediates/assets/debug
+3.baseType=DIRECTORY
+1.set=ASSET
+4.path=jquery.min.js
+6.set=ASSET
+1.baseType=DIRECTORY
+6.baseType=DIRECTORY
+5.path=animate.min.css
+0.base=/Users/mani/Downloads/forecastie-master/app/build/intermediates/assets/debug
+0.baseType=DIRECTORY
+3.set=ASSET
+6.path=font-awesome.min.css
+1.base=/Users/mani/Downloads/forecastie-master/app/build/intermediates/assets/debug
+4.baseType=DIRECTORY
+0.set=ASSET
