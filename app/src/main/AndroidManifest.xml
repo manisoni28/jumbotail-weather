@@ -14,8 +14,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
         <activity
-            android:name="cz.jumbotail.weather.activities.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:name="cz.jumbotail.weather.activities.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,12 +32,11 @@
                     android:host="jumbotail.com"
                     android:pathPrefix="/app/weather"
                     android:scheme="http" />
+                <data android:host="mani.com"
+                    android:pathPrefix="/test"
+                    android:scheme="https"
+                    />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="cz.jumbotail.weather.activities.MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name="cz.jumbotail.weather.activities.SettingsActivity"

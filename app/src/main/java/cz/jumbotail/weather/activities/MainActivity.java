@@ -8,11 +8,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -34,6 +37,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hlab.fabrevealmenu.enums.Direction;
 import com.hlab.fabrevealmenu.listeners.OnFABMenuSelectedListener;
@@ -44,6 +48,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -53,7 +58,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import cz.jumbotail.weather.AlarmReceiver;
 import cz.jumbotail.weather.Constants;
@@ -110,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
     private List<Weather> longTermTomorrowWeather = new ArrayList<>();
 
     public String recentCity = "";
+    String uri="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         // Initiate activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
-
         initItems();
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -189,13 +196,46 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
 
         initMappings();
 
-        // Preload data from cache
-        preloadWeather();
-        updateLastUpdateTime();
+        //Handle deeplinks
+        Uri data = this.getIntent().getData();
+        if (data != null && data.isHierarchical()) {
+            uri += this.getIntent().getDataString();
+        }
+        if(uri.contains("city")){
+        if (!(uri.equals("")) && uri.contains("=")) {
 
+                String[] parts = uri.split("=");
+                saveLocation(parts[1]);
+        }
+        }
+        else if(uri.contains("lat")){
+            String []parts =uri.split(Pattern.quote("?"));
+            String []paramparts =parts[1].split("&");
+            String latparts[]=paramparts[0].split("=");
+            String longparts[]=paramparts[1].split("=");
+            Log.i("lat=",latparts[1]);
+            Log.i("long=",longparts[1]);
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses = null;
+            try {
+                addresses = geocoder.getFromLocation(Double.parseDouble(latparts[1]), Double.parseDouble(longparts[1]), 1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            String cityName = addresses.get(0).getLocality();
+            Log.i("city",cityName);
+            saveLocation(cityName);
+         }
+        else {
+            getCityByLocation();
+            // Preload data from cache
+            preloadWeather();
+            updateLastUpdateTime();
+        }
         // Set autoupdater
         AlarmReceiver.setRecurringAlarm(this);
-        getCityByLocation();
+
+
     }
 
     private void setCurrentTime() {
